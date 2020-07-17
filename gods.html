@@ -3,6 +3,29 @@
     <head>
         <title>SMITE Build Guide</title>
     </head>
+    <h3>Table of the Gods</h3>
+    <table boreder='1'>
+        <thead>
+            <th>God Name</th>
+            <th>Primary Role</th>
+            <th>Primary Class</th>
+            <th>Primary Type</th>
+            <th>Description</th>
+            <th>Build Link</th>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+                <td> {{ r[1] }}</td>
+                <td> {{ r[2] }}</td>
+                <td> {{ r[3] }}</td>
+                <td> {{ r[4] }}</td>
+                <td> {{ r[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <body>
        
     </body>
