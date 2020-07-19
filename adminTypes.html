@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SMITE Build Guide</title>
+    </head>
+    <h3>God Type Table</h3>
+    <table boreder='1'>
+        <thead>
+            <th>Type ID</th>
+            <th>Type Name</th>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+                <td> {{ r[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <body>
+       
+    </body>
+</html>
