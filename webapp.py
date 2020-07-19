@@ -9,12 +9,7 @@ webapp = Flask(__name__)
 def browse_admin_gods():
     print("Fetching and rendering admin level Gods web page")
     #Connect to database
-    db_connection = connect_to_database(
-        host = classmysql.engr.oregonstate.edu,
-        user = cs340_baizam,
-        passwd = 9207,
-        db = cs340_baizam
-        )
+    db_connection = connect_to_database()
     #execute query
     query = "SELECT ;"
     result = execute_query(db_connection, query).fetchall()
