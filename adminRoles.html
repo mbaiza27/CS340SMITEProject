@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SMITE Build Guide</title>
+    </head>
+    <h3>Admin Roles Table</h3>
+    <table boreder='1'>
+        <thead>
+            <th>Role ID</th>
+            <th>Role Name</th>
+            <th>Role Description</th>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+                <td> {{ r[1] }}</td>
+                <td> {{ r[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <body>
+       
+    </body>
+</html>

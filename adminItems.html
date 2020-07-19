@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SMITE Build Guide</title>
+    </head>
+    <h3>Admin Items Table</h3>
+    <table boreder='1'>
+        <thead>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Item Effect</th>
+        </thead>
+        <tbody>
+            {% for r in itemRows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+                <td> {{ r[1] }}</td>
+                <td> {{ r[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <body>
+       
+    </body>
+</html>
