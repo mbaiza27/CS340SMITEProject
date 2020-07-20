@@ -20,7 +20,11 @@
             {% endfor %}
         </tbody>
     </table>
-    <body>
-       
-    </body>
+    <br>
+
+    <h3>Insert new Classes:</h3>
+    <form id="addClass" action="/adminClasses" method="post">
+        Class name: <input type="text" name="class_name"><br>
+        Class description: <input type="text" name="class_description"><br>
+    <input type="submit" value="Submit">
 </html>

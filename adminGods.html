@@ -24,7 +24,27 @@
             {% endfor %}
         </tbody>
     </table>
-    <body>
-       
-    </body>
+    <br>
+
+    <h3>Insert new Gods:</h3>
+    <form id="addGods" action="/adminGods" method="post">
+        God name: <input type="text" name="god_name"><br>
+        Primary Role: <select name="role"><br>
+            <!--{% for r in roleRows %}  -->
+            <option value="{{r.roleID}}">{{r.role_name}}</option>
+            <!--{% endfor %} -->
+        </select><br>
+        Primary Class: <select name="class"><br>
+             <!--{% for r in classRows %} -->
+            <option value="{{r.classID}}">{{r.class_name}}</option>
+            <!-- {% endfor %} -->
+        </select><br>
+        Primary Type: <select name="type"><br>
+            <!-- {% for r in typeRows %} -->
+            <option value="{{r.typeID}}">{{r.type_name}}</option>
+            <!-- {% endfor %} -->
+        </select><br>
+    <br>
+    <input type="submit" value="Submit">
+    </form>
 </html>
