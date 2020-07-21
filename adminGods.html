@@ -4,6 +4,24 @@
         <title>SMITE Build Guide</title>
     </head>
     <h3>Admin God Table</h3>
+    
+    <form id='filter_gods' action='' method=''>
+        <!--- this form does not submit directly, the button handles all the interaction with backend -->
+            <label> Filter by Class, Type, or Role </label>
+            <select id='god_filter' name="god"> 
+                <!-- {% for r in classRows %} -->
+                <option value="{{r.classID}}">{{r.class_name}}</option>
+                <!-- {% endfor %} -->
+                <!--{% for r in roleRows %} -->
+                <option value="{{r.roleID}}">{{r.role_name}}</option>
+                <!-- {% endfor %} -->
+                <!-- {% for r in typeRows %} -->
+                <option value="{{r.typeID}}">{{r.type_name}}</option>
+                <!-- {% endfor %} -->
+            </select><br>
+            <input type="button" value="Filter" onclick="filterGodsByClass()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
+        </form>
+    
     <table border='1'>
         <thead>
             <th>God ID</th>
