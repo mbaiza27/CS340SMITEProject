@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SMITE Items</title>
+    </head>
+    <h3>Table of Items</h3>
+    <table border='1'>
+        <thead>
+            <th>Item Name</th>
+            <th>Item Effect</th>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+                <td> {{ r[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <body>
+       
+    </body>
+</html>

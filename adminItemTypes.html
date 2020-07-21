@@ -4,7 +4,7 @@
         <title>SMITE Build Guide</title>
     </head>
     <h3>Admin Item Types Table</h3>
-    <table boreder='1'>
+    <table border='1'>
         <thead>
             <th>Item Types ID</th>
             <th>Item ID</th>
@@ -16,6 +16,8 @@
                 <td> {{ r.0 }}</td>
                 <td> {{ r[1] }}</td>
                 <td> {{ r[2] }}</td>
+                <td> <button type="button">Edit Entry</button> </td>
+                <td> <button type="button">Delete Entry</button> </td>
             </tr>
             {% endfor %}
         </tbody>
