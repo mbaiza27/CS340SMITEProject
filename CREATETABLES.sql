@@ -1,33 +1,33 @@
 CREATE TABLE Items (
     itemID int(11) AUTO_INCREMENT,
-    item_name varchar(255) NOT NULL,
-    item_effect text,
+    itemName varchar(255) NOT NULL,
+    effect text,
     PRIMARY KEY (itemID),
-    UNIQUE (item_name)
-);
+    UNIQUE (itemName)
+) ENGINE=InnoDB;
 
 CREATE TABLE Roles (
     roleID int(11) AUTO_INCREMENT,
-    role_name varchar(255) NOT NULL,
-    role_description text,
+    roleName varchar(255) NOT NULL,
+    description text,
     PRIMARY KEY (roleID),
-    UNIQUE (role_name)
-);
+    UNIQUE (roleName)
+) ENGINE=InnoDB;
 
 CREATE TABLE Classes (
     classID int(11) AUTO_INCREMENT,
-    class_name varchar(255) NOT NULL,
-    class_description text,
+    className varchar(255) NOT NULL,
+    description text,
     PRIMARY KEY (classID),
-    UNIQUE (class_name)
-);
+    UNIQUE (className)
+) ENGINE=InnoDB;
 
 CREATE TABLE Types (
     typeID int(11) AUTO_INCREMENT,
-    type_name varchar(255) NOT NULL,
+    typeName varchar(255) NOT NULL,
     PRIMARY KEY (typeID),
-    UNIQUE (type_name)
-);
+    UNIQUE (typeName)
+) ENGINE=InnoDB;
 
 CREATE TABLE ItemTypes (
     itemTypeID int(11) AUTO_INCREMENT,
@@ -36,26 +36,26 @@ CREATE TABLE ItemTypes (
     PRIMARY KEY (itemTypeID),  
     FOREIGN KEY (itemID) REFERENCES Items(itemID),
     FOREIGN KEY (typeID) REFERENCES Types(typeID)
-);
+) ENGINE=InnoDB;
 
-CREATE TABLE Gods (
-    godID int(11) AUTO_INCREMENT,
-    god_name varchar(255) NOT NULL,
+CREATE TABLE Characters (
+    characterID int(11) AUTO_INCREMENT,
+    characterName varchar(255) NOT NULL,
     primaryRoleID int(11),
     primaryClassID int (11),
     primaryTypeID int(11),
-    PRIMARY KEY (godID),
-    UNIQUE (god_name),
+    PRIMARY KEY (characterID),
+    UNIQUE (characterName),
     FOREIGN KEY (primaryRoleID) REFERENCES Roles(roleID),
     FOREIGN KEY (primaryClassID) REFERENCES Classes(classID),
     FOREIGN KEY (primaryTypeID) REFERENCES Types(typeID)
-    );
+) ENGINE=InnoDB;
 
 CREATE TABLE Builds (
     buildID int(11) AUTO_INCREMENT,
-    godID int(11),
+    characterID int(11),
     itemID int(11),
     PRIMARY KEY (buildID),
-    FOREIGN KEY (godID) REFERENCES Gods(godID),
+    FOREIGN KEY (characterID) REFERENCES Characters(characterID),
     FOREIGN KEY (itemID) REFERENCES Items(itemID)
-);
+) ENGINE=InnoDB;
