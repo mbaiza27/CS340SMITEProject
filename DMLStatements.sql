@@ -1,3 +1,4 @@
+
 -- *** User input attributes are denoted with :: symbols ***
 
 
@@ -15,6 +16,7 @@ JOIN Characters ch ON bu.characterID = ch.characterID
 JOIN Items it ON bu.itemID = it.itemID 
 WHERE ch.characterName = ::userCharNamePick;
 
+
 -- Items Page, populates table with information about individual Items
 SELECT itemName, effect from Items;
 
@@ -25,7 +27,9 @@ JOIN Types ty ON itt.typeID = ty.typeID
 WHERE it.itemID = (SELECT itemID from Items WHERE itemName = ::userItemPick);
 
 
+
 -- INSERT Statements
+
 
 -- Adding a new Class 
 INSERT INTO Classes (className, description) VALUES (::userClassName, ::userClassDescription);
@@ -47,11 +51,13 @@ VALUES
 (SELECT classID from Classes where className = ::userClassChoice),
 (SELECT typeID from Types where typeName = ::userTypeChoice));
 
+
 -- Adding a new Item-Type relation 
 INSERT INTO ItemTypes (itemID, typeID) 
 VALUES
 ((SELECT itemID from Items WHERE itemName = ::userItemChoice),
 (SELECT typeID from Types WHERE typeName = ::userTypeChoice));
+
 
 
 -- UPDATE Statement, this will by run by an admin
@@ -69,3 +75,4 @@ AND typeID = (SELECT typeID from Types WHERE typeName = ::adminTypePick);
 DELETE FROM ItemTypes 
 WHERE itemID = (SELECT itemID from Items WHERE itemName = ::adminItemIDPick) 
 AND typeID = (SELECT typeID from Types WHERE typeName = ::adminTypePick);
+
