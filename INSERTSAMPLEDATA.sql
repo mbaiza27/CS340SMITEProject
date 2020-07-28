@@ -1,11 +1,14 @@
 -- Inserting of SMITE's items into our table, will be used to recommend items
 INSERT INTO Items (itemName, effect)
 Values
-('The Executioner', "PASSIVE - Basic Attacks against an enemy reduce your target's Physical Protection by 7% for 3 second"),
-("Titan's Bane", "PASSIVE - Your first ability cast gains 20% Physical Penetration. This can only occur once every 10 seconds."),
-('Mystical Mail', "AURA - ALL enemies within 25 units are dealt 40 Magical Damage per second."),
-("Genji's Guard", "PASSIVE - When you take Magical Damage from Abilities your cooldowns are reduced by 3s. This can only occur once every 30s."),
-("Spear of the Magus", "PASSIVE - When you deal damage to an enemy god mark them to take 7.5% increased damage from all sources. This effect lasts for 10s and can only occur once every 10s.");
+('The Executioner', "Basic Attacks against an enemy reduce your target's Physical Protection by 7% for 3 second"),
+("Titan's Bane", "Your first ability cast gains 20% Physical Penetration. This can only occur once every 10 seconds."),
+('Mystical Mail', "ALL enemies within 25 units are dealt 40 Magical Damage per second."),
+("Genji's Guard", "When you take Magical Damage from Abilities your cooldowns are reduced by 3s. This can only occur once every 30s."),
+("Spear of the Magus", "When you deal damage to an enemy god mark them to take 7.5% increased damage from all sources. This effect lasts for 10s and can only occur once every 10s."),
+("Brawler's Beat Stick",'Enemies hit by your Abilities have 40% reduced healing and regeneration for 8 seconds.'),
+('The Sledge','For each enemy within 55 Units, you gain 10 Magical and Physical Protections, stacking up to 3 times.');
+
 
 -- The name of the role and what the role's purpose is
 INSERT INTO Roles (roleName, description)
@@ -42,9 +45,13 @@ Values
 ((SELECT itemID from Items WHERE itemName = 'Mystical Mail'), (SELECT typeID FROM Types WHERE typeName = 'UTILITY')),
 ((SELECT itemID from Items WHERE itemName = "Genji's Guard"), (SELECT typeID FROM Types WHERE typeName = 'DEFENSIVE')),
 ((SELECT itemID from Items WHERE itemName = "Genji's Guard"), (SELECT typeID FROM Types WHERE typeName = 'UTILITY')),
-((SELECT itemID from Items WHERE itemName = 'Spear of the Magus'), (SELECT typeID FROM Types WHERE typeName = 'MAGICAL'));
+((SELECT itemID from Items WHERE itemName = 'Spear of the Magus'), (SELECT typeID FROM Types WHERE typeName = 'MAGICAL')),
+((SELECT itemID from Items WHERE itemName = "Brawler's Beat Stick"), (SELECT typeID FROM Types WHERE typeName = 'PHYSICAL')),
+((SELECT itemID from Items WHERE itemName = 'The Sledge'), (SELECT typeID FROM Types WHERE typeName = 'PHYSICAL')),
+((SELECT itemID from Items WHERE itemName = 'The Sledge'), (SELECT typeID FROM Types WHERE typeName = 'DEFENSIVE')),
+((SELECT itemID from Items WHERE itemName = 'The Sledge'), (SELECT typeID FROM Types WHERE typeName = 'UTILITY'));
 
--- Will store the gods its role, class, and type into the "Gods" table
+-- Will store information about SMITE characters, such as  role, class, and type
 INSERT INTO Characters (characterName, primaryRoleID, primaryClassID, primaryTypeID)
 Values
 ('ACHILLES', (SELECT roleID FROM Roles WHERE roleName = 'SOLO LANER'), (SELECT classID FROM Classes WHERE className = 'WARRIOR'), (SELECT typeID FROM Types WHERE typeName = 'PHYSICAL')),
@@ -54,5 +61,11 @@ Values
 ('ARACHNE', (SELECT roleID FROM Roles WHERE roleName = 'JUNGLER'), (SELECT classID FROM Classes WHERE className = 'ASSASSIN'), (SELECT typeID FROM Types WHERE typeName = 'PHYSICAL'));
 
 
--- Will save for later
--- INSERT INTO Builds
+
+-- Items that characters should build
+INSERT INTO Builds (characterID, itemID)
+Values
+((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = "Brawler's Beat Stick")),
+((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = 'The Sledge')),
+((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = "Genji's Guard"));
+
