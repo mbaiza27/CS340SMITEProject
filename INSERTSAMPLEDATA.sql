@@ -9,6 +9,7 @@ Values
 ("Brawler's Beat Stick",'Enemies hit by your Abilities have 40% reduced healing and regeneration for 8 seconds.'),
 ('The Sledge','For each enemy within 55 Units, you gain 10 Magical and Physical Protections, stacking up to 3 times.');
 
+
 -- The name of the role and what the role's purpose is
 INSERT INTO Roles (roleName, description)
 Values
@@ -60,9 +61,11 @@ Values
 ('ARACHNE', (SELECT roleID FROM Roles WHERE roleName = 'JUNGLER'), (SELECT classID FROM Classes WHERE className = 'ASSASSIN'), (SELECT typeID FROM Types WHERE typeName = 'PHYSICAL'));
 
 
+
 -- Items that characters should build
 INSERT INTO Builds (characterID, itemID)
 Values
 ((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = "Brawler's Beat Stick")),
 ((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = 'The Sledge')),
 ((SELECT characterID FROM Characters WHERE characterName = 'ACHILLES'), (SELECT itemID from Items WHERE itemName = "Genji's Guard"));
+
