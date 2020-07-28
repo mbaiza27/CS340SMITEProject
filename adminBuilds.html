@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SMITE Build Guide</title>
+    </head>
+	<h3>Admin Builds Table</h3>
+	
+	<form id='filter_gods' action='' method=''>
+        <!--- this form does not submit directly, the button handles all the interaction with backend -->
+            <label> Filter by Class, Type, or Role </label>
+            <select id='god_filter' name="god"> 
+                <!-- {% for r in godRows %} -->
+                <option value="{{r.godName}}">{{r.god_name}}</option>
+            </select><br>
+            <input type="button" value="Filter" onclick="filterGodsByname()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
+	</form>
+		
+
+	<h4> Builds for the chosen god shown below. New items to add to the build can be added </h4>
+    <table border='1'>
+        <thead>
+            <th>Item Name</th>
+        </thead>
+        <tbody>
+            {% for r in buildItemRows %}
+            <tr>
+                <td> {{ r.0 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    Insert new Item to Build for current god:
+    <select name="type"><br>
+		<!-- {% for r in typeRows %} -->
+		<option value="{{r.itemID}}">{{r.item_name}}</option>
+		<!-- {% endfor %} -->
+	</select>
+	<br>
+    <input type="submit" value="Submit">
+</html>
