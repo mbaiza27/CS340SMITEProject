@@ -27,14 +27,14 @@
     <h3>Assign classification types to existing items:</h3>
     <form id="addItemTypes" action="/adminItemTypes" method="post">
          Item: <select name="item"><br>
-            <!--{% for r in itemRows %}  -->
+            {% for r in itemRows %}
             <option value="{{r.itemID}}">{{r.item_name}}</option>
-            <!--{% endfor %} -->
+            {% endfor %}
         </select><br>
          Type: <select name="type"><br>
-             <!--{% for r in typeRows %} -->
+             {% for r in typeRows %}
             <option value="{{r.typeID}}">{{r.type_name}}</option>
-            <!-- {% endfor %} -->
+             {% endfor %}
         </select><br>
     <input type="submit" value="Submit">
     </form>
