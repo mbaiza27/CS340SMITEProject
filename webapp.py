@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask import request, redirect
-from db_connector.db_connector import connect_to_database, execute_query
+from db_connector import connect_to_database, execute_query
 #create the web application
 webapp = Flask(__name__)
 
