@@ -9,15 +9,15 @@
         <!--- this form does not submit directly, the button handles all the interaction with backend -->
             <label> Filter by Class, Type, or Role </label>
             <select id='god_filter' name="god"> 
-                <!-- {% for r in classRows %} -->
+                {% for r in classRows %}
                 <option value="{{r.classID}}">{{r.class_name}}</option>
-                <!-- {% endfor %} -->
-                <!--{% for r in roleRows %} -->
+                {% endfor %}
+                {% for r in roleRows %}
                 <option value="{{r.roleID}}">{{r.role_name}}</option>
-                <!-- {% endfor %} -->
-                <!-- {% for r in typeRows %} -->
+                {% endfor %} 
+                {% for r in typeRows %}
                 <option value="{{r.typeID}}">{{r.type_name}}</option>
-                <!-- {% endfor %} -->
+                {% endfor %} 
             </select><br>
             <input type="button" value="Filter" onclick="filterGodsByClass()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
         </form>
@@ -48,19 +48,19 @@
     <form id="addGods" action="/adminGods" method="post">
         God name: <input type="text" name="god_name"><br>
         Primary Role: <select name="role"><br>
-            <!--{% for r in roleRows %}  -->
+            {% for r in roleRows %}
             <option value="{{r.roleID}}">{{r.role_name}}</option>
-            <!--{% endfor %} -->
+            {% endfor %}
         </select><br>
         Primary Class: <select name="class"><br>
-             <!--{% for r in classRows %} -->
+             {% for r in classRows %}
             <option value="{{r.classID}}">{{r.class_name}}</option>
-            <!-- {% endfor %} -->
+             {% endfor %}
         </select><br>
         Primary Type: <select name="type"><br>
-            <!-- {% for r in typeRows %} -->
+            {% for r in typeRows %}
             <option value="{{r.typeID}}">{{r.type_name}}</option>
-            <!-- {% endfor %} -->
+            {% endfor %}
         </select><br>
     <br>
     <input type="submit" value="Submit">

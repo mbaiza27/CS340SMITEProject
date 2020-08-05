@@ -26,7 +26,8 @@ JOIN ItemTypes itt ON it.itemID  = itt.itemID
 JOIN Types ty ON itt.typeID = ty.typeID 
 WHERE it.itemID = (SELECT itemID from Items WHERE itemName = ::userItemPick);
 
-
+-- adminGods page, will select from Gods table.
+SELECT characterID, characterName, primaryRoleID, primaryClassID, primaryTypeID FROM Characters
 
 -- INSERT Statements
 
