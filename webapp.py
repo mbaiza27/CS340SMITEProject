@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask import request, redirect
-from db_connector import connect_to_database, execute_query
+from .db_connector import connect_to_database, execute_query
 #create the web application
 webapp = Flask(__name__)
 
@@ -42,7 +42,7 @@ def add_types():
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminTypes.html', rows=result)
 
-@web.route('/adminClasses')
+@webapp.route('/adminClasses')
 #Page for viewing classes table and adding more classes
 def add_classes():
     db_connection = connect_to_database()
@@ -50,7 +50,7 @@ def add_classes():
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminClasses.html', classRows=result)
 
-@web.route('/adminItems')
+@webapp.route('/adminItems')
 #Page for viewing items table and adding more items
 def add_items():
     db_connection = connect_to_database()
@@ -58,7 +58,7 @@ def add_items():
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminItems.html')
 
-@web.route('/adminItemTypes')
+@webapp.route('/adminItemTypes')
 #Page for viewing item types table and assigning items to types
 def assign_item_types():
     db_connection = connect_to_database()
@@ -70,7 +70,7 @@ def assign_item_types():
     resultTypes = execute_query(db_connection, query3).fetchall()
     return render_template('adminItemTypes.html', rows=resultItemTypes, itemRows=resultItems, typeRows=resultTypes)
 
-@web.route('/adminRoles')
+@webapp.route('/adminRoles')
 #Page for viewing roles and adding new roles
 def add_roles():
     db_connection = connect_to_database()
