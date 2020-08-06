@@ -119,6 +119,7 @@ def insert_class():
 
     return redirect(url_for('add_classes'))
 
+
 @webapp.route('/adminItems', methods=['GET'])
 #Page for viewing items table and adding more items
 def add_items():
@@ -142,6 +143,7 @@ def insert_item():
     execute_query(db_connection, insertQuery, userInput)
 
     return redirect(url_for('add_items'))
+
 
 @webapp.route('/adminItemTypes', methods=['GET'])
 #Page for viewing item types table and assigning items to types
