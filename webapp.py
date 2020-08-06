@@ -157,6 +157,16 @@ def assign_item_types():
     resultTypes = execute_query(db_connection, query3).fetchall()
     return render_template('adminItemTypes.html', rows=resultItemTypes, itemRows=resultItems, typeRows=resultTypes)
 
+@webapp.route('/delete_Item_Types/<int:id>')
+#Backend code for delete functionality
+def delete_Item_Types():
+    db_connection = connect_to_database()
+    query = "DELETE FROM ItemTypes WHERE itemID = (SELECT itemID from Items WHERE itemName = %s) AND typeID = (SELECT typeID from Types WHERE typeName = %s);"
+    data = (id,)
+
+    result = execute_query(db_connection, query, data)
+    return (str(result.rowcount) + "row deleted")
+
 @webapp.route('/adminRoles', methods=['GET'])
 #Page for viewing roles and adding new roles
 def add_roles():
