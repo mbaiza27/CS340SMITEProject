@@ -163,6 +163,38 @@ def assign_item_types():
     resultTypes = execute_query(db_connection, query3).fetchall()
     return render_template('adminItemTypes.html', rows=resultItemTypes, itemRows=resultItems, typeRows=resultTypes)
 
+@webapp.route('/update_Item_Types/<string:itemName>/<string:typeName>', methods=['POST','GET'])
+def update_Item_Types(itemName, typeName):
+    print('In the function')
+    db_connection = connect_to_database()
+    #display existing data
+    if request.method == 'GET':
+        print('The GET request')
+        item_types_query = "SELECT itt.itemTypeID, it.itemName, ty.typeName FROM ItemTypes itt \
+        JOIN Items it ON itt.itemID = it.itemID \
+        JOIN Types ty ON itt.typeID = ty.typeID \
+        ORDER BY itt.itemTypeID ASC"
+        types_query = "SELECT DISTINCT typeName FROM Types"
+        data = (itemName, typeName)
+        item_types_result = execute_query(db_connection, item_types_query).fetchall()
+        types_result = execute_query(db_connection, types_query).fetchall()
+
+        if item_types_result == None:
+            return "No such Item/Type combination found!"
+
+        print('Returning')
+        return render_template('updateItemTypes.html', typeRows=types_query, rows=item_types_result)
+    elif request.method == 'POST':
+        print('The POST request')
+        typeName = request.form['typeName']
+        
+        query = "UPDATE ItemTypes SET typeID = (SELECT typeID FROM Types WHERE typeName = %s) WHERE itemID = (SELECT itemID from Items WHERE itemName = %s) AND typeID = (SELECT typeID from Types WHERE typeName = %s);"
+        data = (typeName, itemName, newTypeName)
+        result = execute_query(db_connection, query, data)
+        print(str(result.rowcount) + " row(s) updated")
+
+        return redirect(url_for('assign_item_types'))
+
 @webapp.route('/delete_Item_Types/<string:itemName>/<string:typeName>')
 #Backend code for delete functionality
 def delete_Item_Types(itemName, typeName):
