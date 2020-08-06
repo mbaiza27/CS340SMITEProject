@@ -205,4 +205,3 @@ def insert_role():
 
     return redirect(url_for('add_roles'))
 
-    
