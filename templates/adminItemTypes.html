@@ -7,13 +7,13 @@
     <table border='1'>
         <thead>
             <th>Item Types ID</th>
-            <th>Item ID</th>
-            <th>Type ID</th>
+            <th>Item</th>
+            <th>Type</th>
         </thead>
         <tbody>
             {% for r in rows %}
             <tr>
-                <td> {{ r.0 }}</td>
+                <td> {{ r[0] }}</td>
                 <td> {{ r[1] }}</td>
                 <td> {{ r[2] }}</td>
                 <td> <button type="button">Edit Entry</button> </td>
@@ -25,15 +25,15 @@
     <br>
 
     <h3>Assign classification types to existing items:</h3>
-    <form id="addItemTypes" action="/adminItemTypes" method="post">
-         Item: <select name="item"><br>
+    <form id="addItemTypes" action="/addItemType" method="post">
+         Item: <select name="userItem"><br>
             {% for r in itemRows %}
-            <option value="{{r.itemID}}">{{r.item_name}}</option>
+            <option value="{{ r[0] }}">{{ r[1] }}</option>
             {% endfor %}
         </select><br>
-         Type: <select name="type"><br>
+         Type: <select name="userType"><br>
              {% for r in typeRows %}
-            <option value="{{r.typeID}}">{{r.type_name}}</option>
+             <option value="{{ r[0] }}">{{ r[1] }}</option>
              {% endfor %}
         </select><br>
     <input type="submit" value="Submit">

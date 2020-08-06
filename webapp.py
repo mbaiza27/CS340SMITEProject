@@ -150,13 +150,20 @@ def insert_item():
 def assign_item_types():
     db_connection = connect_to_database()
     query = "SELECT itemTypeID, itemID, typeID FROM ItemTypes"
-    query2 = "SELECT itemName FROM Items"
-    query3 = "SELECT typeName FROM Types"
+
+    query = "SELECT itt.itemTypeID, it.itemName, ty.typeName FROM ItemTypes itt \
+    JOIN Items it ON itt.itemID = it.itemID \
+    JOIN Types ty ON itt.typeID = ty.typeID \
+    ORDER BY itt.itemTypeID ASC"
+
+    query2 = "SELECT itemID, itemName FROM Items"
+    query3 = "SELECT typeID, typeName FROM Types"
     resultItemTypes = execute_query(db_connection, query).fetchall()
     resultItems = execute_query(db_connection, query2).fetchall()
     resultTypes = execute_query(db_connection, query3).fetchall()
     return render_template('adminItemTypes.html', rows=resultItemTypes, itemRows=resultItems, typeRows=resultTypes)
 
+<<<<<<< HEAD
 @webapp.route('/delete_Item_Types/<int:id>')
 #Backend code for delete functionality
 def delete_Item_Types():
@@ -166,6 +173,24 @@ def delete_Item_Types():
 
     result = execute_query(db_connection, query, data)
     return (str(result.rowcount) + "row deleted")
+=======
+@webapp.route('/addItemType', methods=['POST'])
+#Page for viewing item types table and assigning items to types
+def insert_item_type():
+
+    itemChoice= request.form['userItem']
+    typeChoice = request.form['userType']
+
+    db_connection = connect_to_database()
+
+    insertQuery = "INSERT INTO ItemTypes (itemID, typeID) VALUES (%s, %s)"
+
+    userInput = (itemChoice,typeChoice)
+
+    execute_query(db_connection, insertQuery, userInput)
+    
+    return redirect(url_for('assign_item_types'))
+>>>>>>> 6f98d83531e69560af54959c5cc0b6a730aab232
 
 @webapp.route('/adminRoles', methods=['GET'])
 #Page for viewing roles and adding new roles
@@ -191,3 +216,4 @@ def insert_role():
     execute_query(db_connection, insertQuery, userInput)
 
     return redirect(url_for('add_roles'))
+
