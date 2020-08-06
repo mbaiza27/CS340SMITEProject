@@ -10,13 +10,13 @@
             <label> Filter by Class, Type, or Role </label>
             <select id='god_filter' name="god"> 
                 {% for r in classRows %}
-                <option value="{{r.classID}}">{{r.class_name}}</option>
+                <option value="{{r.classChoice}}">Class - {{ r[1] }}</option>
                 {% endfor %}
                 {% for r in roleRows %}
-                <option value="{{r.roleID}}">{{r.role_name}}</option>
+                <option value="{{r.roleChoice}}">Role - {{ r[1] }}</option>
                 {% endfor %} 
                 {% for r in typeRows %}
-                <option value="{{r.typeID}}">{{r.type_name}}</option>
+                <option value="{{r.typeChoice}}">Type - {{ r[1] }}</option>
                 {% endfor %} 
             </select><br>
             <input type="button" value="Filter" onclick="filterGodsByClass()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
@@ -26,9 +26,9 @@
         <thead>
             <th>God ID</th>
             <th>God Name</th>
-            <th>Primary Role ID</th>
-            <th>Primary Class ID</th>
-            <th>Primary Type ID</th>
+            <th>Primary Role</th>
+            <th>Primary Class</th>
+            <th>Primary Type</th>
         </thead>
         <tbody>
             {% for r in godRows %}
@@ -45,21 +45,21 @@
     <br>
 
     <h3>Insert new Gods:</h3>
-    <form id="addGods" action="/adminGods" method="post">
-        God name: <input type="text" name="god_name"><br>
-        Primary Role: <select name="role"><br>
+    <form id="addGods" action="/addGod" method="post">
+        God name: <input type="text" name="userGodName"><br>
+        Primary Role: <select name="userRole"><br>
             {% for r in roleRows %}
-            <option value="{{r.roleID}}">{{r.role_name}}</option>
+            <option value="{{ r.0 }}">{{ r[1] }}</option>
             {% endfor %}
         </select><br>
-        Primary Class: <select name="class"><br>
+        Primary Class: <select name="userClass"><br>
              {% for r in classRows %}
-            <option value="{{r.classID}}">{{r.class_name}}</option>
+            <option value="{{ r.0 }}">{{ r[1] }}</option>
              {% endfor %}
         </select><br>
-        Primary Type: <select name="type"><br>
+        Primary Type: <select name="userType"><br>
             {% for r in typeRows %}
-            <option value="{{r.typeID}}">{{r.type_name}}</option>
+            <option value="{{ r.0 }}">{{ r[1] }}</option>
             {% endfor %}
         </select><br>
     <br>
