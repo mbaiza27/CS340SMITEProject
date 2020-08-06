@@ -77,6 +77,23 @@ def add_types():
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminTypes.html', rows=result)
 
+@webapp.route('/addType', methods=['POST'])
+#Page for viewing types table and adding types
+def insert_type():
+
+    newTypeName = request.form['userTypeName']
+
+    db_connection = connect_to_database()
+
+    insertQuery = 'INSERT INTO Types (typeName) VALUES (%s)'
+
+    # the comma - https://stackoverflow.com/questions/21740359/python-mysqldb-typeerror-not-all-arguments-converted-during-string-formatting
+
+    userInput = (newTypeName,)
+    execute_query(db_connection, insertQuery, userInput)
+
+    return redirect(url_for('add_types'))
+
 @webapp.route('/adminClasses', methods=['GET'])
 #Page for viewing classes table and adding more classes
 def add_classes():
@@ -85,13 +102,48 @@ def add_classes():
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminClasses.html', classRows=result)
 
+@webapp.route('/addClass', methods=['POST'])
+#Page for viewing classes table and adding more classes
+def insert_class():
+
+    newClassName = request.form['userClassName']
+    newClassDescrip = request.form['userClassDescription']
+
+    db_connection = connect_to_database()
+
+    insertQuery = "INSERT INTO Classes (className, description) VALUES (%s, %s)"
+
+    userInput = (newClassName, newClassDescrip)
+
+    execute_query(db_connection, insertQuery, userInput)
+
+    return redirect(url_for('add_classes'))
+
+
 @webapp.route('/adminItems', methods=['GET'])
 #Page for viewing items table and adding more items
 def add_items():
     db_connection = connect_to_database()
     query = "SELECT itemID, itemName, effect FROM Items"
     result = execute_query(db_connection, query).fetchall()
-    return render_template('adminItems.html')
+    return render_template('adminItems.html', itemRows=result)
+
+@webapp.route('/addItem', methods=['POST'])
+#Page for viewing items table and adding more items
+def insert_item():
+    newItemName = request.form['userItemName']
+    newItemEffect = request.form['userItemEffect']
+
+    db_connection = connect_to_database()
+
+    insertQuery = "INSERT INTO Items (itemName, effect) VALUES (%s, %s)"
+
+    userInput = (newItemName,newItemEffect)
+
+    execute_query(db_connection, insertQuery, userInput)
+
+    return redirect(url_for('add_items'))
+
 
 @webapp.route('/adminItemTypes', methods=['GET'])
 #Page for viewing item types table and assigning items to types
@@ -112,3 +164,20 @@ def add_roles():
     query = "SELECT roleID, roleName, description FROM Roles"
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminRoles.html', rows=result)
+
+@webapp.route('/addRole', methods=['POST'])
+#Page for viewing roles and adding new roles
+def insert_role():
+
+    newRoleName = request.form['userRoleName']
+    newItemDescrip = request.form['userRoleDescription']
+
+    db_connection = connect_to_database()
+    
+    insertQuery = "INSERT INTO Roles (roleName, description) VALUES (%s, %s)"
+
+    userInput = (newRoleName,newItemDescrip)
+
+    execute_query(db_connection, insertQuery, userInput)
+
+    return redirect(url_for('add_roles'))
