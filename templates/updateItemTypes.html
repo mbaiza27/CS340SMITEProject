@@ -17,11 +17,12 @@
 </table>
 <br>
 
-<form id="update_Item_Types" action="/update_Item_Types" method="post">
+<form id="update_Item_Types" action="/update_Item_Types/{{rows[1]}}/{{rows[2]}}" method="post">
         New Type: <select name="userType"><br>
-            {% for r in rows %}
+            {% for r in typeRows %}
             <option value="{{ r.0 }}">{{ r[1] }}</option>
             {% endfor %}
        </select><br>
+    <br>
    <input type="submit" value="Submit">
    </form>

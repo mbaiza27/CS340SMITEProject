@@ -173,23 +173,23 @@ def update_Item_Types(itemName, typeName):
         item_types_query = "SELECT itt.itemTypeID, it.itemName, ty.typeName FROM ItemTypes itt \
         JOIN Items it ON itt.itemID = it.itemID \
         JOIN Types ty ON itt.typeID = ty.typeID \
-        ORDER BY itt.itemTypeID ASC"
-        types_query = "SELECT DISTINCT typeName FROM Types"
+        WHERE it.itemName = %s AND ty.typeName = %s"
+        types_query = "SELECT typeID, typeName FROM Types"
         data = (itemName, typeName)
-        item_types_result = execute_query(db_connection, item_types_query).fetchall()
+        item_types_result = execute_query(db_connection, item_types_query, data).fetchone()
         types_result = execute_query(db_connection, types_query).fetchall()
 
         if item_types_result == None:
             return "No such Item/Type combination found!"
 
         print('Returning')
-        return render_template('updateItemTypes.html', typeRows=types_query, rows=item_types_result)
+        return render_template('updateItemTypes.html', typeRows=types_result, rows=item_types_result)
     elif request.method == 'POST':
         print('The POST request')
-        typeName = request.form['typeName']
+        newtypeName = request.form['userType']
         
         query = "UPDATE ItemTypes SET typeID = (SELECT typeID FROM Types WHERE typeName = %s) WHERE itemID = (SELECT itemID from Items WHERE itemName = %s) AND typeID = (SELECT typeID from Types WHERE typeName = %s);"
-        data = (typeName, itemName, newTypeName)
+        data = (newtypeName, itemName, typeName)
         result = execute_query(db_connection, query, data)
         print(str(result.rowcount) + " row(s) updated")
 
