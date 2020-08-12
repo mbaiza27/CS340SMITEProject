@@ -176,7 +176,7 @@ def update_Item_Types(itemName, typeName):
         WHERE it.itemName = %s AND ty.typeName = %s"
         types_query = "SELECT typeID, typeName FROM Types"
         data = (itemName, typeName)
-        item_types_result = execute_query(db_connection, item_types_query, data).fetchone()
+        item_types_result = execute_query(db_connection, item_types_query, data).fetchall()
         types_result = execute_query(db_connection, types_query).fetchall()
 
         if item_types_result == None:
