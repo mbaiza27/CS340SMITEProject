@@ -8,7 +8,7 @@ webapp = Flask(__name__)
 def default_page():
     return render_template('index.html')
 
-@webapp.route('/gods')
+@webapp.route('/gods', methods=['GET'])
 #Page for browsing gods
 def browse_gods():
     db_connection = connect_to_database()
@@ -17,8 +17,32 @@ def browse_gods():
     JOIN Classes cl ON ch.primaryClassID = cl.classID  \
     JOIN Types ty ON ch.primaryTypeID = ty.typeID;"
 
+
     result = execute_query(db_connection, query).fetchall()
-    return render_template('gods.html', rows=result)
+    return render_template('gods.html', rows=result, showBuilds=0)
+
+@webapp.route('/gods', methods=['POST'])
+#Page for browsing gods
+def browse_god_builds():
+    db_connection = connect_to_database()
+
+    godBuild = request.form['godBuildChoice']
+
+    query = "SELECT ch.characterName, ro.roleName, cl.className, ty.typeName FROM Characters ch \
+    JOIN Roles ro ON ch.primaryRoleID = ro.roleID  \
+    JOIN Classes cl ON ch.primaryClassID = cl.classID  \
+    JOIN Types ty ON ch.primaryTypeID = ty.typeID;"
+
+
+    buildQuery = "SELECT it.itemName, it.effect FROM Builds bu \
+    JOIN Characters ch ON bu.characterID = ch.characterID \
+    JOIN Items it ON bu.itemID = it.itemID \
+    WHERE ch.characterName = '" + godBuild +"';" 
+
+    result = execute_query(db_connection, query).fetchall()
+    buildResult = execute_query(db_connection, buildQuery).fetchall()
+    return render_template('gods.html', rows=result, buildrows=buildResult, showBuilds=1)
+
 
 @webapp.route('/items', methods=['GET'])
 #Page for browsing items

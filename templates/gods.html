@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>SMITE Build Guide</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleGods233.css') }}">
     </head>
     <h3>Table of the Gods</h3>
     <table border='1'>
@@ -22,6 +23,27 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <h3>Show Recommended Build For:</h3>
+
+    <form id="getGodBuild" action="/gods" method="post">
+        Item: <select name="godBuildChoice"><br>
+           {% for r in rows %}
+           <option value="{{ r[0] }}">{{ r[0] }}</option>
+           {% endfor %}
+       </select><br>
+   <input type="submit" value="Submit">
+   </form>
+
+    {% if showBuilds == 1 %}
+    <h3>Recommended Items:</h3>
+        {% for r in buildrows %}
+                <details>
+                    <summary> {{ r[0] }} </summary>
+                    <p> {{ r[1] }} </p>
+                </details>
+        {% endfor %}
+    {% endif %}
     <body>
        
     </body>
