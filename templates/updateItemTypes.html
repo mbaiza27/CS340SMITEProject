@@ -1,0 +1,13 @@
+<h3>Update Item Type</h3>
+<br>
+<form id="update_Item_Types" action="/update_Item_Types/{{rows[0]}}" method="post">
+        Item: <input type="text" name="itemName" value="{{rows[1]}}" readonly><br>
+        Current Type: <input type="text" name="currentType" value="{{rows[2]}}" readonly><br>
+        New Type: <select name="userType"><br>
+            {% for r in typeRows %}
+            <option value="{{ r[1] }}">{{ r[1] }}</option>
+            {% endfor %}
+       </select><br>
+    <br>
+   <input type="submit" value="Submit">
+   </form>
