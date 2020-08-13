@@ -1,26 +1,11 @@
 <h3>Update Item Type</h3>
-<table border='1'>
-    <thead>
-        <th>Item Types ID</th>
-        <th>Item</th>
-        <th>Type</th>
-    </thead>
-    <tbody>
-        {% for r in rows %}
-        <tr>
-            <td> {{ r[0] }}</td>
-            <td> {{ r[1] }}</td>
-            <td> {{ r[2] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 <br>
-
-<form id="update_Item_Types" action="/update_Item_Types/{{rows[1]}}/{{rows[2]}}" method="post">
+<form id="update_Item_Types" action="/update_Item_Types/{{rows[0]}}" method="post">
+        Item: <input type="text" name="itemName" value="{{rows[1]}}" readonly><br>
+        Current Type: <input type="text" name="currentType" value="{{rows[2]}}" readonly><br>
         New Type: <select name="userType"><br>
             {% for r in typeRows %}
-            <option value="{{ r.0 }}">{{ r[1] }}</option>
+            <option value="{{ r[1] }}">{{ r[1] }}</option>
             {% endfor %}
        </select><br>
     <br>

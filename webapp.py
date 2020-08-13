@@ -163,8 +163,8 @@ def assign_item_types():
     resultTypes = execute_query(db_connection, query3).fetchall()
     return render_template('adminItemTypes.html', rows=resultItemTypes, itemRows=resultItems, typeRows=resultTypes)
 
-@webapp.route('/update_Item_Types/<string:itemName>/<string:typeName>', methods=['POST','GET'])
-def update_Item_Types(itemName, typeName):
+@webapp.route('/update_Item_Types/<int:id>', methods=['POST','GET'])
+def update_Item_Types(id):
     print('In the function')
     db_connection = connect_to_database()
     #display existing data
@@ -173,10 +173,9 @@ def update_Item_Types(itemName, typeName):
         item_types_query = "SELECT itt.itemTypeID, it.itemName, ty.typeName FROM ItemTypes itt \
         JOIN Items it ON itt.itemID = it.itemID \
         JOIN Types ty ON itt.typeID = ty.typeID \
-        WHERE it.itemName = %s AND ty.typeName = %s"
+        WHERE itt.itemTypeID = %s" % (id)
         types_query = "SELECT typeID, typeName FROM Types"
-        data = (itemName, typeName)
-        item_types_result = execute_query(db_connection, item_types_query, data).fetchall()
+        item_types_result = execute_query(db_connection, item_types_query).fetchone()
         types_result = execute_query(db_connection, types_query).fetchall()
 
         if item_types_result == None:
@@ -187,6 +186,8 @@ def update_Item_Types(itemName, typeName):
     elif request.method == 'POST':
         print('The POST request')
         newtypeName = request.form['userType']
+        itemName = request.form['itemName']
+        typeName = request.form['currentType']
         
         query = "UPDATE ItemTypes SET typeID = (SELECT typeID FROM Types WHERE typeName = %s) WHERE itemID = (SELECT itemID from Items WHERE itemName = %s) AND typeID = (SELECT typeID from Types WHERE typeName = %s);"
         data = (newtypeName, itemName, typeName)
