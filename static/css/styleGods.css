@@ -1,0 +1,29 @@
+details
+{
+    width: auto;
+}
+details > summary
+{
+    cursor: pointer;
+}
+
+table
+{
+    border-collapse: collapse;
+}
+
+th
+{
+    background-color: lightskyblue;
+}
+
+th, td 
+{
+    padding: 10px;
+    text-align: left;
+}
+
+tr:hover 
+{
+    background-color: #cecece;
+}
