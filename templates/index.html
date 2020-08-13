@@ -2,42 +2,59 @@
 <html>
     <head>
         <title>SMITE Build Guide</title>
+        <!-- CSS will go here if we have time-->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleTemplate.css') }}">
     </head>
     <body>
-        <h1>Index: For all HTML pages for CS340 Project</h1>
-        <h2>HTML Pages:</h2>
+        <div class="headerTitle">
+            <h1>Smite Database</h1>
+        </div>
+        <div class="navigationBar">
+            <ul>
+                <li><a href="gods">Gods</a></li>
+                <li><a href="items">Items</a></li>
+                <li><a href="adminGods">Admin God Table</a></li>
+                <li><a href="adminTypes">Admin Types Table</a></li>
+                <li><a href="adminClasses">Admin Classes Table</a></li>
+                <li><a href="adminItems">Admin Items Table</a></li>
+                <li><a href="adminItemTypes">Admin Item Types Table</a></li>
+                <li><a href="adminRoles">Admin Roles Table</a></li>
+                <li><a href="adminBuilds">Admin Builds Table</a></li>
+            </ul>
+        </div>
+        <br>
         Ignore this pages as they have no functionality except to display final results to user
         <br>
-        <a href="gods">gods.html</a>
-        <a href="items">items.html</a>
+        
+        
         <br>
         This page allows Admins to view the available "Gods" table and INSERT new gods if need be also allows for the FILTER of gods based on their class, role, or type
         <br>
-        <a href="adminGods">adminGods.html</a>
+        
         <br>
         This page allows Admins to view the available "Types" in the game and INSERT new types if need be
         <br>
-        <a href="adminTypes">adminTypes.html</a>
+        
         <br>
         This page allows Admins to view the available "Classes" in the game and INSERT new classes if need be
         <br>
-        <a href="adminClasses">adminClasses.html</a>
+        
         <br>
         This page allows Admins to view the available "Items" in the game and INSERT new items if need be
         <br>
-        <a href="adminItems">adminItems.html</a>
+        
         <br>
         This page allows Admins to assign existing types to existing items. It will also allow admins to DELETE types from items AND/OR UPDATE types from items. Note: An item must atleast have 1 type.
         <br>
-        <a href="adminItemTypes">adminItemTypes.html</a>
+        
         <br>
         This page allows Admins to view the available "Roles" in the game and INSERT new roles if need be
         <br>
-        <a href="adminRoles">adminRoles.html</a>
+        
         <br>
         This page allows Admins to view the current build for any God and INSERT new items into the build
         <br>
-        <a href="adminBuilds">adminBuilds.html</a>
+        
         <br>
         NOTE: Most functionality resides in the admin pages. Admin pages are not meant to be used to change tables very often. For example it is highly unlikely that new classes and roles will ever be added into the game, but the functionality is there just incase the game undergoes drastic changes. Whereas adding new gods, types, items, etc. is much more likely but only happens a handful of times throughout the year.
     </body>
