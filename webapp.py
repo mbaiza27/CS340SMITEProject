@@ -48,11 +48,39 @@ def add_gods():
 
     return render_template('adminGods.html', godRows=godResult, classRows=classResult, roleRows=roleResult, typeRows=typeResult)
 
+@webapp.route('/adminGods', methods=['POST'])
+#Page for viewing gods table and adding gods
+def filter_gods():
+    db_connection = connect_to_database()
+
+    userFilter = request.form['godFilter']
+    userFilterArr = userFilter.split(" ")
+
+    filterMappings = {
+        "T" : "ty.typeID",
+        "R" : "ro.roleID",
+        "C" : "cl.classID"
+    }
+
+    query = "SELECT ch.characterID, ch.characterName, ro.roleName, cl.className, ty.typeName FROM Characters ch \
+    JOIN Roles ro ON ch.primaryRoleID = ro.roleID  \
+    JOIN Classes cl ON ch.primaryClassID = cl.classID  \
+    JOIN Types ty ON ch.primaryTypeID = ty.typeID \
+    WHERE " + filterMappings[userFilterArr[0]] + " = " + userFilterArr[1]
+
+    query2 = "SELECT roleID, roleName FROM Roles"
+    query3 = "SELECT classID, className FROM Classes"
+    query4 = "SELECT typeID, typeName FROM Types"
+
+    godResult = execute_query(db_connection, query).fetchall()
+    roleResult = execute_query(db_connection, query2).fetchall()
+    classResult = execute_query(db_connection, query3).fetchall()
+    typeResult = execute_query(db_connection, query4).fetchall()
+
+    return render_template('adminGods.html', godRows=godResult, classRows=classResult, roleRows=roleResult, typeRows=typeResult)
 
 @webapp.route('/addGod', methods=['POST'])
 def insert_god():
-    print("ayy lmao")
-
     newGodName = request.form['userGodName']
     newGodRole = request.form['userRole']
     newGodClass = request.form['userClass']
