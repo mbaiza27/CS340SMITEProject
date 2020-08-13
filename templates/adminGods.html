@@ -4,23 +4,26 @@
         <title>SMITE Build Guide</title>
     </head>
     <h3>Admin God Table</h3>
+
     
-    <form id='filter_gods' action='' method=''>
-        <!--- this form does not submit directly, the button handles all the interaction with backend -->
+    
+    <form id='filter_gods' action='/adminGods' method='post'>
             <label> Filter by Class, Type, or Role </label>
-            <select id='god_filter' name="god"> 
+            <select id='god_filter' name="godFilter"> 
                 {% for r in classRows %}
-                <option value="{{r.classChoice}}">Class - {{ r[1] }}</option>
+                <option value="C {{ r[0] }}">Class - {{ r[1] }}</option>
                 {% endfor %}
                 {% for r in roleRows %}
-                <option value="{{r.roleChoice}}">Role - {{ r[1] }}</option>
+                <option value="R {{ r[0] }}">Role - {{ r[1] }}</option>
                 {% endfor %} 
                 {% for r in typeRows %}
-                <option value="{{r.typeChoice}}">Type - {{ r[1] }}</option>
+                <option value="T {{ r[0] }}">Type - {{ r[1] }}</option>
                 {% endfor %} 
             </select><br>
-            <input type="button" value="Filter" onclick="filterGodsByClass()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
+            <input type="submit" value="Filter">
         </form>
+        <!--- https://stackoverflow.com/questions/29884654/button-that-refreshes-the-page-on-click -->
+        <button onClick="window.location.href=window.location.href">Remove Filter</button>
     
     <table border='1'>
         <thead>
