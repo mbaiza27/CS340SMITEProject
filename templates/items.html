@@ -28,11 +28,30 @@
             <tbody>
                 {% for r in rows %}
                 <tr>
-                    <td> {{ r.0 }}</td>
                     <td> {{ r[1] }}</td>
+                    <td> {{ r[2] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>       
+        </table>
+
+        <h3>Get Item Types:</h3>
+        <form id="getItemType" action="/items" method="post">
+        Item: <select name="itemTypeChoice"><br>
+           {% for r in rows %}
+           <option value="{{ r[0] }}">{{ r[1] }}</option>
+           {% endfor %}
+       </select><br>
+   <input type="submit" value="Submit">
+   </form>
+
+    {% if showTypes == 1 %}
+    <h3>Item types</h3>
+        {% for r in typeRows %}
+                {{ r[0] }} <br>
+        {% endfor %}
+    {% endif %}
+
+
     </body>
 </html>
