@@ -2,7 +2,23 @@
 <html>
     <head>
         <title>SMITE Build Guide</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleNavBar.css') }}">
     </head>
+    <body>
+        <div class="navigationBar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="gods">Gods</a></li>
+                <li><a href="items">Items</a></li>
+                <li><a href="adminGods">Admin God Table</a></li>
+                <li><a href="adminTypes">Admin Types Table</a></li>
+                <li><a href="adminClasses">Admin Classes Table</a></li>
+                <li><a href="adminItems">Admin Items Table</a></li>
+                <li><a href="adminItemTypes">Admin Item Types Table</a></li>
+                <li class="activePage"><a href="adminRoles">Admin Roles Table</a></li>
+                <li><a href="adminBuilds">Admin Builds Table</a></li>
+            </ul>
+        </div>
     <h3>Admin Roles Table</h3>
     <table border='1'>
         <thead>
@@ -27,4 +43,6 @@
         Class name: <input type="text" name="userRoleName"><br>
         Class description: <input type="text" name="userRoleDescription"><br>
     <input type="submit" value="Submit">
+    </form>
+    </body>
 </html>

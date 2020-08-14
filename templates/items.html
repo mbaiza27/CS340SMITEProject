@@ -2,23 +2,37 @@
 <html>
     <head>
         <title>SMITE Items</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleNavBar.css') }}">
     </head>
-    <h3>Table of Items</h3>
-    <table border='1'>
-        <thead>
-            <th>Item Name</th>
-            <th>Item Effect</th>
-        </thead>
-        <tbody>
-            {% for r in rows %}
-            <tr>
-                <td> {{ r.0 }}</td>
-                <td> {{ r[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
     <body>
-       
+        <div class="navigationBar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="gods">Gods</a></li>
+                <li class="activePage"><a href="items">Items</a></li>
+                <li><a href="adminGods">Admin God Table</a></li>
+                <li><a href="adminTypes">Admin Types Table</a></li>
+                <li><a href="adminClasses">Admin Classes Table</a></li>
+                <li><a href="adminItems">Admin Items Table</a></li>
+                <li><a href="adminItemTypes">Admin Item Types Table</a></li>
+                <li><a href="adminRoles">Admin Roles Table</a></li>
+                <li><a href="adminBuilds">Admin Builds Table</a></li>
+            </ul>
+        </div>
+        <h3>Table of Items</h3>
+        <table border='1'>
+            <thead>
+                <th>Item Name</th>
+                <th>Item Effect</th>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td> {{ r.0 }}</td>
+                    <td> {{ r[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>       
     </body>
 </html>
