@@ -48,9 +48,25 @@ def browse_god_builds():
 #Page for browsing items
 def browse_items():
     db_connection = connect_to_database()
-    query = "SELECT itemName, effect FROM Items"
+    query = "SELECT itemID, itemName, effect FROM Items"
     result = execute_query(db_connection, query).fetchall()
-    return render_template('items.html', rows=result)
+    return render_template('items.html', rows=result, showTypes=0)
+
+@webapp.route('/items', methods=['POST'])
+#Page for browsing items
+def browse_items_types():
+    db_connection = connect_to_database()
+
+    userItem = request.form['itemTypeChoice']
+    
+    query = "SELECT itemID, itemName, effect FROM Items"
+    typesQuery = "SELECT ty.typeName from ItemTypes it \
+    JOIN Types ty on it.typeID = ty.typeID \
+    WHERE it.itemID = " + userItem
+    
+    result = execute_query(db_connection, query).fetchall()
+    typesResult = execute_query(db_connection, typesQuery).fetchall()
+    return render_template('items.html', rows=result, typeRows=typesResult, showTypes=1)
 
 @webapp.route('/adminGods', methods=['GET'])
 #Page for viewing gods table and adding gods
@@ -306,9 +322,11 @@ def insert_role():
 def browse_builds():
     db_connection = connect_to_database()
     godQuery = "SELECT characterID, characterName FROM Characters;"
+    itemQuery = "SELECT itemID, itemName From Items;"
+    itemResult = execute_query(db_connection,itemQuery).fetchall()
 
     godResult = execute_query(db_connection, godQuery).fetchall()
-    return render_template('adminBuilds.html', charRows=godResult, showBuilds=0)
+    return render_template('adminBuilds.html', charRows=godResult, itemRows=itemResult, showBuilds=0)
 
 @webapp.route('/adminBuilds', methods=['POST'])
 #Page for browsing gods
