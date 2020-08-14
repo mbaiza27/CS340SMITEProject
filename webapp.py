@@ -300,3 +300,50 @@ def insert_role():
 
     return redirect(url_for('add_roles'))
 
+
+@webapp.route('/adminBuilds', methods=['GET'])
+#Page for browsing builds
+def browse_builds():
+    db_connection = connect_to_database()
+    godQuery = "SELECT characterID, characterName FROM Characters;"
+
+    godResult = execute_query(db_connection, godQuery).fetchall()
+    return render_template('adminBuilds.html', charRows=godResult, showBuilds=0)
+
+@webapp.route('/adminBuilds', methods=['POST'])
+#Page for browsing gods
+def browse_builds_items():
+    db_connection = connect_to_database()
+
+    godChoice = request.form['userGodChoice']
+    godQuery = "SELECT characterID, characterName FROM Characters;"
+    itemQuery = "SELECT itemID, itemName From Items;"
+
+    buildQuery = "SELECT it.itemName, it.effect FROM Builds bu \
+    JOIN Characters ch ON bu.characterID = ch.characterID \
+    JOIN Items it ON bu.itemID = it.itemID \
+    WHERE ch.characterID = " + godChoice
+
+    godResult = execute_query(db_connection, godQuery).fetchall()
+    itemResult = execute_query(db_connection,itemQuery).fetchall()
+    buildResult = execute_query(db_connection,buildQuery).fetchall()
+
+    return render_template('adminBuilds.html', charRows=godResult, itemRows=itemResult, buildRows=buildResult, showBuilds=1)
+
+
+@webapp.route('/addBuildItem', methods=['POST'])
+#Page for viewing roles and adding new roles
+def insert_build_item():
+
+    userGod = request.form['userGodChoice']
+    userItem = request.form['userItemChoice']
+
+    db_connection = connect_to_database()
+    
+    insertQuery = "INSERT INTO Builds (characterID, itemID) VALUES (%s, %s)"
+
+    userInput = (userGod,userItem)
+
+    execute_query(db_connection, insertQuery, userInput)
+
+    return redirect(url_for('browse_builds'))

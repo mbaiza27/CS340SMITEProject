@@ -3,14 +3,17 @@
     <head>
         <title>SMITE Build Guide</title>
         <!-- CSS will go here if we have time-->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleTemplate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleHome.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleNavBar.css') }}">
     </head>
     <body>
+        
         <div class="headerTitle">
             <h1>Smite Database</h1>
         </div>
         <div class="navigationBar">
             <ul>
+                <li class="activePage"><a href="/">Home</a></li>
                 <li><a href="gods">Gods</a></li>
                 <li><a href="items">Items</a></li>
                 <li><a href="adminGods">Admin God Table</a></li>

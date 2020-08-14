@@ -1,10 +1,3 @@
-html
-{ height: 100%;}
-
-*
-{ margin: 0;
-  padding: 0;}
-
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
   background: #F0EFE2;
@@ -29,6 +22,7 @@ div {
   background: rgba(219, 222, 224, 0.66);
 }
 
+<<<<<<< HEAD:static/css/styleTemplate.css
 /* nav bar */
 
  ul {
@@ -54,6 +48,8 @@ div.navigationBar li {
 li a:hover {
   background-color: #5796e9;
 }
+=======
+>>>>>>> 92a2f71df089180b275f98d73d61d83ac60aee1c:static/css/styleHome.css
 
 /* header */
 .headerTitle {

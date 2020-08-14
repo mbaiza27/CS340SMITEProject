@@ -2,41 +2,60 @@
 <html>
     <head>
         <title>SMITE Build Guide</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleNavBar.css') }}">
     </head>
-	<h3>Admin Builds Table</h3>
+    <body>
+        <div class="navigationBar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="gods">Gods</a></li>
+                <li><a href="items">Items</a></li>
+                <li><a href="adminGods">Admin God Table</a></li>
+                <li><a href="adminTypes">Admin Types Table</a></li>
+                <li><a href="adminClasses">Admin Classes Table</a></li>
+                <li><a href="adminItems">Admin Items Table</a></li>
+                <li><a href="adminItemTypes">Admin Item Types Table</a></li>
+                <li><a href="adminRoles">Admin Roles Table</a></li>
+                <li class="activePage"><a href="adminBuilds">Admin Builds Table</a></li>
+            </ul>
+        </div>
+        
+	<h3>Select a God to See their Build</h3>
 	
-	<form id='filter_gods' action='' method=''>
-        <!--- this form does not submit directly, the button handles all the interaction with backend -->
-            <label> Filter by Class, Type, or Role </label>
-            <select id='god_filter' name="god"> 
-                <!-- {% for r in godRows %} -->
-                <option value="{{r.godName}}">{{r.god_name}}</option>
-            </select><br>
-            <input type="button" value="Filter" onclick="filterGodsByname()"> <!--This will be a placeholder function name until we figure out what we want to do on the backend-->
-	</form>
-		
-
-	<h4> Builds for the chosen god shown below. New items to add to the build can be added </h4>
-    <table border='1'>
-        <thead>
-            <th>Item Name</th>
-        </thead>
-        <tbody>
-            {% for r in buildItemRows %}
-            <tr>
-                <td> {{ r.0 }}</td>
-            </tr>
+	<form id="selectGod" action="/adminBuilds" method="post">
+        Select a God: <select name="userGodChoice"><br>
+            {% for r in charRows %}
+            <option value="{{ r[0] }}">{{ r[1] }}</option>
             {% endfor %}
-        </tbody>
-    </table>
-    <br>
+        </select><br>
+    <input type="submit" value="Select">
+    </form>
 
-    Insert new Item to Build for current god:
-    <select name="type"><br>
-		<!-- {% for r in typeRows %} -->
-		<option value="{{r.itemID}}">{{r.item_name}}</option>
-		<!-- {% endfor %} -->
-	</select>
-	<br>
-    <input type="submit" value="Submit">
+    {% if showBuilds == 1 %}
+    <h3> Builds for the chosen god shown below </h3>
+        {% for r in buildRows %}
+                <details>
+                    <summary> {{ r[0] }} </summary>
+                    <p> {{ r[1] }} </p>
+                </details>
+        {% endfor %}
+    {% endif %}
+    
+    <h3>Insert new Items to a God's Build</h3>
+
+    <form id="selectGod" action="/addBuildItem" method="post">
+        Select a God: <select name="userGodChoice"><br>
+            {% for r in charRows %}
+            <option value="{{ r[0] }}">{{ r[1] }}</option>
+            {% endfor %}
+        </select><br>
+        Item Choice: <select name="userItemChoice"><br>
+            {% for r in itemRows %}
+            <option value="{{ r[0] }}">{{ r[1] }}</option>
+            {% endfor %}
+        </select><br>
+    <input type="submit" value="Select">
+    </form>
+
+    </body>
 </html>
