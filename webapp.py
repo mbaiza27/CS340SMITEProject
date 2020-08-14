@@ -141,7 +141,7 @@ def insert_god():
 #Page for viewing types table and adding types
 def add_types():
     db_connection = connect_to_database()
-    query = "SELECT typeID, typeName FROM Types"
+    query = "SELECT typeID, typeName FROM Types ORDER BY typeID ASC"
     result = execute_query(db_connection, query).fetchall()
     return render_template('adminTypes.html', rows=result)
 

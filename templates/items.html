@@ -36,7 +36,7 @@
             </tbody>
         </table>
 
-        <h3>Get Item Types:</h3>
+        <h3>Show Item Type(s) for:</h3>
         <form id="getItemType" action="/items" method="post">
         Item: <select name="itemTypeChoice"><br>
            {% for r in rows %}
@@ -47,7 +47,7 @@
    </form>
 
     {% if showTypes == 1 %}
-    <h3>Item types</h3>
+    <h3>Item type(s)</h3>
         {% for r in typeRows %}
                 {{ r[0] }} <br>
         {% endfor %}
